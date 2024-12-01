@@ -1,4 +1,6 @@
-use aoc::{generate_answer_tests, Solution};
+#[cfg(test)]
+use aoc::generate_answer_tests;
+use aoc::Solution;
 
 mod day01;
 mod day02;
