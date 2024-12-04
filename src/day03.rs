@@ -47,8 +47,6 @@ impl aoc::Solution for Solution {
     }
 }
 
-const NUMBERS: [char; 10] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-
 fn is_mul(s: &[char], start: usize) -> (usize, Option<i32>) {
     if start + 8 >= s.len() {
         return (start + 8, None);
@@ -62,7 +60,7 @@ fn is_mul(s: &[char], start: usize) -> (usize, Option<i32>) {
     let mut a_str = String::new();
     let mut b_str = String::new();
     while i < s.len() {
-        if NUMBERS.contains(&s[i]) {
+        if s[i].is_ascii_digit() {
             if second {
                 b_str.push(s[i]);
             } else {
