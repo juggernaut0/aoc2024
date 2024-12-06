@@ -31,13 +31,13 @@ fn parse_input(input: &str) -> (HashSet<(i32, i32)>, Vec<Vec<i32>>) {
         .lines()
         .map(|line| {
             let (a, b) = line.split_once('|').unwrap();
-            (a.parse::<i32>().unwrap(), b.parse::<i32>().unwrap())
+            (a.parse().unwrap(), b.parse().unwrap())
         })
         .collect();
 
     let updates = updates_str
         .lines()
-        .map(|line| line.split(',').map(|n| n.parse::<i32>().unwrap()).collect())
+        .map(|line| line.split(',').map(|n| n.parse().unwrap()).collect())
         .collect();
 
     (rules, updates)
