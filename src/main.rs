@@ -1,3 +1,5 @@
+#![warn(clippy::pedantic)]
+
 #[cfg(test)]
 use aoc::generate_answer_tests;
 use aoc::Solution;

@@ -1,4 +1,4 @@
-use aoc::{Dir, Grid, Point};
+use aoc::{Dir, DirSet, Grid, Point};
 use std::collections::HashSet;
 
 pub struct Solution;
@@ -48,13 +48,12 @@ impl From<char> for Tile {
 fn simulate(map: &Grid<Tile>) -> Option<HashSet<Point>> {
     let mut pos = map
         .points_with_item()
-        .find(|(_, &t)| t == Tile::Start)
-        .map(|(p, _)| p)
+        .find_map(|(p, &t)| if t == Tile::Start { Some(p) } else { None })
         .unwrap();
     let mut dir = Dir::N;
-    let mut visited_state = HashSet::<(Point, Dir)>::new();
+    let mut visited_state = Grid::from_elem(map.width(), map.height(), DirSet::new());
     while map.contains_point(pos) {
-        if !visited_state.insert((pos, dir)) {
+        if !visited_state[pos].insert(dir) {
             return None;
         }
         let forward = pos + dir.diff();
@@ -64,5 +63,10 @@ fn simulate(map: &Grid<Tile>) -> Option<HashSet<Point>> {
             pos = forward;
         }
     }
-    Some(visited_state.into_iter().map(|(p, _)| p).collect())
+    Some(
+        visited_state
+            .points_with_item()
+            .filter_map(|(p, ds)| if ds.is_empty() { None } else { Some(p) })
+            .collect(),
+    )
 }
