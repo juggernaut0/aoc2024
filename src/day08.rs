@@ -32,7 +32,7 @@ fn solve(input: &str, part2: bool) -> String {
     let unique_freqs = unique_freqs(&map);
     let mut antinodes = HashSet::new();
     for freq in unique_freqs {
-        let antennae = find_antenae(&map, freq);
+        let antennae = find_antennae(&map, freq);
         for i in 0..antennae.len() {
             for j in i + 1..antennae.len() {
                 for antinode in calculate_antinodes(antennae[i], antennae[j], &map, part2) {
@@ -54,7 +54,7 @@ fn unique_freqs(map: &Grid<Tile>) -> HashSet<char> {
     unique_freqs
 }
 
-fn find_antenae(map: &Grid<Tile>, freq: char) -> Vec<Point> {
+fn find_antennae(map: &Grid<Tile>, freq: char) -> Vec<Point> {
     map.points_with_item()
         .filter_map(|(p, t)| {
             if let Tile::Antenna(c) = t {
