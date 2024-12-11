@@ -71,8 +71,7 @@ fn find_antennae(map: &Grid<Tile>, freq: char) -> Vec<Point> {
 }
 
 fn calculate_antinodes(p1: Point, p2: Point, map: &Grid<Tile>, part2: bool) -> Vec<Point> {
-    let dx = p2.0 - p1.0;
-    let dy = p2.1 - p1.1;
+    let Point(dx, dy) = p2 - p1;
     let mut res = Vec::new();
     if part2 {
         res.push(p1);
