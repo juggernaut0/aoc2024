@@ -1,7 +1,5 @@
 #![warn(clippy::pedantic)]
 
-#[cfg(test)]
-use aoc::generate_answer_tests;
 use aoc::Solution;
 
 mod day01;
@@ -63,4 +61,4 @@ fn main() {
 }
 
 #[cfg(test)]
-generate_answer_tests!(SOLUTIONS);
+aoc::generate_answer_tests!(SOLUTIONS);
