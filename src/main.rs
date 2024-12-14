@@ -42,7 +42,10 @@ const SOLUTIONS: [&dyn Solution; 25] = [
     &day11::Solution,
     &day12::Solution,
     &day13::Solution,
-    &day14::Solution,
+    &day14::Solution {
+        width: 101,
+        height: 103,
+    },
     &day15::Solution,
     &day16::Solution,
     &day17::Solution,
