@@ -6,13 +6,12 @@ impl aoc::Solution for Solution {
     fn solve_1(&self, input: String) -> String {
         let (towels, designs) = parse_input(&input);
 
+        let mut memo = HashMap::new();
+        memo.insert("", 1);
+
         designs
             .into_iter()
-            .filter(|design| {
-                let mut memo = HashMap::new();
-                memo.insert("", 1);
-                get_matches(&towels, design, &mut memo) > 0
-            })
+            .filter(|design| get_matches(&towels, design, &mut memo) > 0)
             .count()
             .to_string()
     }
@@ -20,13 +19,12 @@ impl aoc::Solution for Solution {
     fn solve_2(&self, input: String) -> String {
         let (towels, designs) = parse_input(&input);
 
+        let mut memo = HashMap::new();
+        memo.insert("", 1);
+
         designs
             .into_iter()
-            .map(|design| {
-                let mut memo = HashMap::new();
-                memo.insert("", 1);
-                get_matches(&towels, design, &mut memo)
-            })
+            .map(|design| get_matches(&towels, design, &mut memo))
             .sum::<u64>()
             .to_string()
     }
@@ -43,12 +41,13 @@ fn get_matches<'a>(towels: &[&str], design: &'a str, memo: &mut HashMap<&'a str,
     if let Some(&result) = memo.get(design) {
         return result;
     }
-    let mut all_results = 0;
-    for towel in towels {
-        if let Some(rest) = design.strip_prefix(towel) {
-            all_results += get_matches(towels, rest, memo);
-        }
-    }
+
+    let all_results = towels
+        .iter()
+        .filter_map(|towel| design.strip_prefix(towel))
+        .map(|rest| get_matches(towels, rest, memo))
+        .sum();
+
     memo.insert(design, all_results);
     all_results
 }
