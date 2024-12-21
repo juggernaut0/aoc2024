@@ -1,6 +1,5 @@
 use aoc::{Counter, Grid, Point};
 use std::collections::VecDeque;
-use std::fmt::{Debug, Formatter};
 
 pub struct Solution;
 
