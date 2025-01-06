@@ -54,6 +54,7 @@ dependencies = [
 [[package]]
 name = "aoc"
 version = "0.1.0"
+source = "git+https://github.com/juggernaut0/aoc?branch=2024#670ffd5bb0edf35850141e22b7eabf4f202eb8c2"
 dependencies = [
  "clap",
  "log",
